@@ -19,6 +19,18 @@ public final class Data {
 	private static final Map<UUID, Data> PLAYER_DATA = new HashMap<>();
 	private static final Path FOLDER = Paths.get("playerdata");
 
+	static
+	{
+		try
+		{
+			Files.createDirectories(Data.FOLDER);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	public static Data getData(UUID uniqueId)
 	{
 		return Data.PLAYER_DATA.computeIfAbsent(uniqueId, key -> new Data(Data.FOLDER.resolve(uniqueId + ".yml")));
@@ -43,6 +55,11 @@ public final class Data {
 	{
 		try
 		{
+			if (Files.notExists(path))
+			{
+				Files.createFile(path);
+				return new YamlConfiguration();
+			}
 			return YamlConfiguration.loadConfiguration(Files.newBufferedReader(path));
 		}
 		catch (IOException e)
