@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.function.LongFunction;
 import java.util.function.Supplier;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -51,12 +53,36 @@ public final class PlayerData {
 		this.data.set(path, value);
 	}
 
-	public void setIfEmpty(String path, Supplier<Object> value)
+	public void computeIfAbsent(String path, Supplier<Object> value)
 	{
 		if (this.data.get(path) == null)
 		{
 			this.set(path, value.get());
 		}
+	}
+
+	public Object compute(String path, Function<Object, Object> computation)
+	{
+		Object newValue = computation.apply(this.get(path));
+		this.set(path, newValue);
+		return newValue;
+	}
+
+	public Object computeLong(String path, LongFunction<Object> computation)
+	{
+		Object newValue = computation.apply(this.getLong(path));
+		this.set(path, newValue);
+		return newValue;
+	}
+
+	public Object get(String path)
+	{
+		return this.data.get(path);
+	}
+
+	public long getLong(String path)
+	{
+		return this.data.getLong(path);
 	}
 
 	public void save()
