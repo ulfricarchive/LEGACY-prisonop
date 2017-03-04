@@ -11,16 +11,24 @@ import java.util.function.Function;
 import java.util.function.LongFunction;
 import java.util.function.Supplier;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.prisonop.PrisonOP;
 
 public final class Data {
 
 	private static final Map<UUID, Data> PLAYER_DATA = new HashMap<>();
-	private static final Path FOLDER = Paths.get("playerdata");
+	private static final ConfigurationSection CONFIG;
+	private static final String FILE_EXTENSION;
+	private static final Path FOLDER;
 
 	static
 	{
+		CONFIG = PrisonOP.getConfig("data");
+		FILE_EXTENSION = Data.CONFIG.getString("extension");
+		FOLDER = Paths.get(Data.CONFIG.getString("path"));
 		try
 		{
 			Files.createDirectories(Data.FOLDER);
@@ -33,7 +41,7 @@ public final class Data {
 
 	public static Data getData(UUID uniqueId)
 	{
-		return Data.PLAYER_DATA.computeIfAbsent(uniqueId, key -> new Data(Data.FOLDER.resolve(uniqueId + ".yml")));
+		return Data.PLAYER_DATA.computeIfAbsent(uniqueId, key -> new Data(Data.FOLDER.resolve(uniqueId + Data.FILE_EXTENSION)));
 	}
 
 	static void saveAllData()
