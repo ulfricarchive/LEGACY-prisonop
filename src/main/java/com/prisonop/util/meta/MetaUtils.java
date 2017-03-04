@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.metadata.Metadatable;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import com.prisonop.PrisonOP;
 
