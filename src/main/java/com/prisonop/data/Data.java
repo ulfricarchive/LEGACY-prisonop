@@ -36,10 +36,10 @@ public final class Data {
 	Data(Path path)
 	{
 		this.path = path;
-		this.data = this.getData(path);
+		this.data = this.loadData(path);
 	}
 
-	private FileConfiguration getData(Path path)
+	private FileConfiguration loadData(Path path)
 	{
 		try
 		{
