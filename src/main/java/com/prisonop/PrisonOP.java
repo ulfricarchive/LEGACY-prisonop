@@ -13,7 +13,12 @@ public final class PrisonOP extends JavaPlugin {
 
 	public static ConfigurationSection getConfig(String configName)
 	{
-		return JavaPlugin.getPlugin(PrisonOP.class).getConfig().getConfigurationSection(configName);
+		return PrisonOP.getInstance().getConfig().getConfigurationSection(configName);
+	}
+
+	public static PrisonOP getInstance()
+	{
+		return JavaPlugin.getPlugin(PrisonOP.class);
 	}
 
 	@Override

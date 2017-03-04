@@ -35,7 +35,7 @@ public enum MetaUtils {
 
 	public static void set(Metadatable metadatable, String path, Object value)
 	{
-		metadatable.setMetadata("u_" + path, new FixedMetadataValue(JavaPlugin.getPlugin(PrisonOP.class), value));
+		metadatable.setMetadata("u_" + path, new FixedMetadataValue(PrisonOP.getInstance(), value));
 	}
 
 }
