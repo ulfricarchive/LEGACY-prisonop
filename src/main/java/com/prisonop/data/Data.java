@@ -19,7 +19,7 @@ import com.prisonop.PrisonOP;
 
 public final class Data {
 
-	private static final Map<UUID, Data> PLAYER_DATA = new HashMap<>();
+	private static final Map<UUID, Data> PERSISTENT_DATA = new HashMap<>();
 	private static final ConfigurationSection CONFIG;
 	private static final String FILE_EXTENSION;
 	private static final Path FOLDER;
@@ -41,12 +41,12 @@ public final class Data {
 
 	public static Data getData(UUID uniqueId)
 	{
-		return Data.PLAYER_DATA.computeIfAbsent(uniqueId, key -> new Data(Data.FOLDER.resolve(uniqueId + Data.FILE_EXTENSION)));
+		return Data.PERSISTENT_DATA.computeIfAbsent(uniqueId, key -> new Data(Data.FOLDER.resolve(uniqueId + Data.FILE_EXTENSION)));
 	}
 
 	static void saveAllData()
 	{
-		Data.PLAYER_DATA.values().forEach(Data::save);
+		Data.PERSISTENT_DATA.values().forEach(Data::save);
 	}
 
 	private final Path path;
