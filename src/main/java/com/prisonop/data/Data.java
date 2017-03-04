@@ -14,21 +14,26 @@ import java.util.function.Supplier;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public final class PlayerData {
+public final class Data {
 
-	private static final Map<UUID, PlayerData> PLAYER_DATA = new HashMap<>();
+	private static final Map<UUID, Data> PLAYER_DATA = new HashMap<>();
 	private static final Path FOLDER = Paths.get("playerdata");
 
-	public static PlayerData getPlayerData(UUID uniqueId)
+	public static Data getData(UUID uniqueId)
 	{
-		return PlayerData.PLAYER_DATA.computeIfAbsent(uniqueId, key -> new PlayerData(PlayerData.FOLDER.resolve(uniqueId + ".yml")));
+		return Data.PLAYER_DATA.computeIfAbsent(uniqueId, key -> new Data(Data.FOLDER.resolve(uniqueId + ".yml")));
+	}
+
+	static void saveAllData()
+	{
+		Data.PLAYER_DATA.values().forEach(Data::save);
 	}
 
 	private final Path path;
 	private final FileConfiguration data;
 	private boolean changed;
 
-	PlayerData(Path path)
+	Data(Path path)
 	{
 		this.path = path;
 		this.data = this.getData(path);
