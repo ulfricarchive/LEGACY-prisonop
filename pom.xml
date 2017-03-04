@@ -7,7 +7,7 @@
 	<groupId>com.prisonop</groupId>
 	<artifactId>prisonop</artifactId>
 	<version>1.0.0</version>
-	<name>Prison OP</name>
+	<name>PrisonOP</name>
 
 	<build>
 		<defaultGoal>clean install</defaultGoal>

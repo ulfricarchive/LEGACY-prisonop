@@ -8,7 +8,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.metadata.Metadatable;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.prisonop.Prisonop;
+import com.prisonop.PrisonOP;
 
 public enum MetaUtils {
 
@@ -35,7 +35,7 @@ public enum MetaUtils {
 
 	public static void set(Metadatable metadatable, String path, Object value)
 	{
-		metadatable.setMetadata("u_" + path, new FixedMetadataValue(JavaPlugin.getPlugin(Prisonop.class), value));
+		metadatable.setMetadata("u_" + path, new FixedMetadataValue(JavaPlugin.getPlugin(PrisonOP.class), value));
 	}
 
 }
